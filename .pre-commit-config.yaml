@@ -1,0 +1,37 @@
+repos:
+-   repo: local
+    hooks:
+
+    - id: black
+      name: black
+      description: "Black: The uncompromising Python code formatter"
+      entry: black
+      language: python
+      require_serial: true
+      types_or: [python, pyi]
+
+    - id: isort
+      name: isort
+      entry: isort
+      require_serial: true
+      language: python
+      language_version: python3
+      types_or: [cython, pyi, python]
+      args: ['--filter-files']
+
+    - id: mypy
+      name: mypy
+      entry: mypy
+      language: python
+      'types_or': [python, pyi]
+      args: ["--namespace-packages", "--ignore-missing-imports", "--explicit-package-bases"]
+      require_serial: true
+      additional_dependencies: []
+
+    - id: pytest-check
+      name: pytest-check
+      entry: pytest
+      types: [python]
+      language: python
+      pass_filenames: false
+      always_run: true
