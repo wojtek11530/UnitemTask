@@ -1,0 +1,9 @@
+### Development tools ###
+black==22.3.0
+isort==5.10.1
+mypy==0.960
+pre-commit==2.19.0
+pytest==7.1.2
+
+### Project packages ###
+numpy==1.22.4
