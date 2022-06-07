@@ -5,7 +5,7 @@ from unittest.mock import patch
 
 import numpy as np
 
-from unitem_task.consumer import Consumer
+from unitem_task.components.consumer import Consumer
 
 
 class ConsumerTestCase(unittest.TestCase):
@@ -21,10 +21,10 @@ class ConsumerTestCase(unittest.TestCase):
             in_queue=in_queue, out_queue=out_queue, stop_event=stop_event
         )
 
-        with patch("unitem_task.consumer.Consumer.process_data") as mock:
+        with patch("unitem_task.components.consumer.Consumer.process_data") as mock:
             mock.return_value = 1
-            stop_event.set()
             consumer.start()
+            stop_event.set()
             consumer.join()
 
         data_put_into_queue_counter = 0
