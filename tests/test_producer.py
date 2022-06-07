@@ -2,7 +2,7 @@ import unittest
 from queue import Queue
 from threading import Event
 
-from unitem_task.producer import Producer
+from unitem_task.components.producer import Producer
 
 
 class ProducerTestCase(unittest.TestCase):
