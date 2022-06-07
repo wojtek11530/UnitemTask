@@ -18,7 +18,8 @@ class SaveTask(threading.Thread):
     """
     Class for thread with save task.
 
-    It runs a task which saves images from input queue as png files.
+    It runs a task which saves images from input queue as png files. It ends its work when the
+    input queue is empty and when the stop event is set.
 
     Args:
         in_queue (Queue): Input queue

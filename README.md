@@ -7,7 +7,7 @@ consumer. The producer utilizes the data source, which generates random images, 
 the consumer which process them. After that images are passed to additional task (run on separate 
 thread) which saves them to as PNG files to `processed` directory.
 
-Tu run the main app:
+To run the main app:
 ```
 python -m unitem_task.main
 ```

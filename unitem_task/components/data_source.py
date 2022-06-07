@@ -10,10 +10,11 @@ class Source:
     It generates random images with given shape.
 
     Args:
-        source_shape (tuple): Tuple with dimension if generated images
+        source_shape (tuple): Tuple with dimension HxWxC of generated images, H - height,
+        W - width, C - channels.
 
     Attributes:
-        source_shape (tuple): Tuple with dimension if generated images
+        source_shape (tuple): Tuple with dimension of generated images
     """
 
     def __init__(self, source_shape: Tuple[int, int, int]):
