@@ -15,6 +15,18 @@ logging.basicConfig(
 
 
 class Consumer(threading.Thread):
+    """
+    Class for Consumer thread.
+
+    It runs a task of consuming images from inpu queue, preprocessing them and passinng to
+    the output queue.
+
+    Args:
+        in_queue (Queue): Input queue
+        out_queue (Queue): Output queue
+        stop_event (Event): Event which stops consumer work
+    """
+
     def __init__(self, in_queue: Queue, out_queue: Queue, stop_event: threading.Event):
         super().__init__()
         self._in_queue = in_queue

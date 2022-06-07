@@ -17,6 +17,23 @@ logging.basicConfig(
 
 
 class Producer(threading.Thread):
+    """
+    Class for Producer thread.
+
+    It runs a task of generating a number of images and passing it to the output queue.
+
+    Args:
+        queue (Queue): Output queue
+        stop_event (Event): Event which is set when producer ends the task
+        data_limit (int): Limit of generated images
+        time_period (int): Period of time between producing data, in milliseconds
+        source_shape (tuple): Tuple with dimension if generated images
+
+    Attributes:
+        data_limit (int): Limit of generated images
+        time_period (int): Period of time between producing data, in milliseconds
+    """
+
     def __init__(
         self,
         queue: Queue,
