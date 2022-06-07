@@ -5,13 +5,14 @@ from queue import Queue
 from typing import Tuple
 
 from unitem_task.data_source import Source
+from unitem_task.settings import LOG_DATA_FORMAT, LOG_LVL, LOGGING_FORMAT
 
-_MILLISECONDS_IN_SEC = 100
+_MILLISECONDS_IN_SEC = 1000
 
 logging.basicConfig(
-    format="%(asctime)s - %(levelname)s - %(message)s",
-    datefmt="%d.%m.%y %H:%M:%S",
-    level=logging.INFO,
+    format=LOGGING_FORMAT,
+    datefmt=LOG_DATA_FORMAT,
+    level=LOG_LVL,
 )
 
 
@@ -38,9 +39,11 @@ class Producer(threading.Thread):
             data_item = self._data_source.get_data()
             self._queue.put(data_item)
             sent_data += 1
-            logging.info("Producer sent image: %d/%d.", sent_data, self.data_limit)
+            logging.info(
+                "Producer sent image: %d out of %d.", sent_data, self.data_limit
+            )
             time.sleep(self.time_period_ms / _MILLISECONDS_IN_SEC)
 
         logging.info("Producer sends stop event.")
         self._stop_event.set()
-        logging.info("Producer ends working")
+        logging.info("Producer ends working.")

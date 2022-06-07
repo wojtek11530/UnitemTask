@@ -1,17 +1,16 @@
 import logging
 import threading
 from queue import Empty, Queue
-from time import sleep
 
 import cv2
 import numpy as np
 
-_SLEEP_TIME = 0.05  # in seconds
+from unitem_task.settings import LOG_DATA_FORMAT, LOG_LVL, LOGGING_FORMAT
 
 logging.basicConfig(
-    format="%(asctime)s - %(levelname)s - %(message)s",
-    datefmt="%d.%m.%y %H:%M:%S",
-    level=logging.INFO,
+    format=LOGGING_FORMAT,
+    datefmt=LOG_DATA_FORMAT,
+    level=LOG_LVL,
 )
 
 
@@ -26,17 +25,14 @@ class Consumer(threading.Thread):
         logging.info("Consumer starts working.")
         i = 0
         while not (self._in_queue.empty() and self._stop_event.is_set()):
-            logging.info("Consumer tries to get image.")
             try:
-                img = self._in_queue.get()
+                img = self._in_queue.get(block=False)
                 i += 1
-                logging.info("Consumer got image: %d", i)
+                logging.info("Consumer got image: %d.", i)
                 processed_img = self.process_data(img)
                 self._out_queue.put(processed_img)
             except Empty:
-                logging.info("Empty queue")
-
-            sleep(_SLEEP_TIME)
+                logging.debug("Empty queue")
 
         logging.info("Consumer ends working.")
 
