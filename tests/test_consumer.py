@@ -23,8 +23,8 @@ class ConsumerTestCase(unittest.TestCase):
 
         with patch("unitem_task.consumer.Consumer.process_data") as mock:
             mock.return_value = 1
-            stop_event.set()
             consumer.start()
+            stop_event.set()
             consumer.join()
 
         data_put_into_queue_counter = 0

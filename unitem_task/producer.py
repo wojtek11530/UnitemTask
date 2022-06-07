@@ -1,3 +1,4 @@
+import logging
 import threading
 import time
 from queue import Queue
@@ -6,6 +7,12 @@ from typing import Tuple
 from unitem_task.data_source import Source
 
 _MILLISECONDS_IN_SEC = 100
+
+logging.basicConfig(
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    datefmt="%d.%m.%y %H:%M:%S",
+    level=logging.INFO,
+)
 
 
 class Producer(threading.Thread):
@@ -25,11 +32,15 @@ class Producer(threading.Thread):
         self._stop_event = stop_event
 
     def run(self) -> None:
+        logging.info("Producer starts working.")
         sent_data = 0
         while sent_data < self.data_limit:
             data_item = self._data_source.get_data()
             self._queue.put(data_item)
             sent_data += 1
+            logging.info("Producer sent image: %d/%d.", sent_data, self.data_limit)
             time.sleep(self.time_period_ms / _MILLISECONDS_IN_SEC)
 
+        logging.info("Producer sends stop event.")
         self._stop_event.set()
+        logging.info("Producer ends working")
