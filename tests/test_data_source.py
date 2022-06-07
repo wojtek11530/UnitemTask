@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-from unitem_task.data_source import Source
+from unitem_task.components.data_source import Source
 
 
 class DataSourceTestSuite(unittest.TestCase):

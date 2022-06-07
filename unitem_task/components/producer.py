@@ -4,7 +4,7 @@ import time
 from queue import Queue
 from typing import Tuple
 
-from unitem_task.data_source import Source
+from unitem_task.components.data_source import Source
 from unitem_task.settings import LOG_DATA_FORMAT, LOG_LVL, LOGGING_FORMAT
 
 _MILLISECONDS_IN_SEC = 1000
