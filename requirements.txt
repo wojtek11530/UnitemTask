@@ -1,9 +1,10 @@
+### Legacy file, a better solution is to use poetry to manage dependencies.
 ### Development tools ###
 black==22.3.0
 isort==5.10.1
-mypy==0.960
+mypy==0.961
 pre-commit==2.19.0
-pylint==2.14.0
+pylint==2.14.1
 pytest==7.1.2
 
 ### Project packages ###
