@@ -19,19 +19,23 @@ def run_app():
     data_limit = 100
     time_period = 50
 
-    queue_A = Queue()
-    queue_B = Queue()
+    queue_img_to_process = Queue()  # queue A in the task instruction
+    queue_img_to_save = Queue()  # queue B in the task instruction
     stop_event = Event()
 
     producer = Producer(
-        queue=queue_A,
+        queue=queue_img_to_process,
         stop_event=stop_event,
         data_limit=data_limit,
         time_period=time_period,
         source_shape=data_shape,
     )
-    consumer = Consumer(in_queue=queue_A, out_queue=queue_B, stop_event=stop_event)
-    save_task = SaveTask(in_queue=queue_B, stop_event=stop_event)
+    consumer = Consumer(
+        in_queue=queue_img_to_process,
+        out_queue=queue_img_to_save,
+        stop_event=stop_event,
+    )
+    save_task = SaveTask(in_queue=queue_img_to_save, stop_event=stop_event)
 
     producer.start()
     consumer.start()

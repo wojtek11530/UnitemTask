@@ -18,8 +18,8 @@ class Consumer(threading.Thread):
     """
     Class for Consumer thread.
 
-    It runs a task of consuming images from inpu queue, preprocessing them and passinng to
-    the output queue.
+    It runs a task of consuming images from input queue, preprocessing them and passing to
+    the output queue. It ends its work when the input queue is empty and when stop event is set.
 
     Args:
         in_queue (Queue): Input queue
